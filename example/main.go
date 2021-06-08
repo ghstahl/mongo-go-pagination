@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
-	paginate "github.com/gobeam/mongo-go-pagination"
+	"time"
+
+	paginate "github.com/ghstahl/mongo-go-pagination"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"time"
 )
 
 // Product struct
