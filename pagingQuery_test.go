@@ -184,11 +184,11 @@ func TestGetSkip(t *testing.T) {
 		}, {
 			limit:    10,
 			page:     2,
-			expected: 9,
+			expected: 10,
 		}, {
 			limit:    10,
 			page:     3,
-			expected: 19,
+			expected: 20,
 		},
 	}
 
