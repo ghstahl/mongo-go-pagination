@@ -112,6 +112,11 @@ func main() {
     	// Querying paginated data
     	// Sort and select are optional
         // Multiple Sort chaining is also allowed
+        // If you want to do some complex sort like sort by score(weight) for full text search fields you can do it easily
+        // sortValue := bson.M{
+        //		"$meta" : "textScore",
+        //	}
+        // aggPaginatedData, err := paginate.New(collection).Context(ctx).Limit(limit).Page(page).Sort("score", sortValue)...
         var products []Product
     	paginatedData, err := New(collection).Context(ctx).Limit(limit).Page(page).Sort("price", -1).Select(projection).Filter(filter).Decode(&products).Find()
     	if err != nil {
@@ -130,7 +135,7 @@ func main() {
 ```
 ***Notice:***
 ```go
-        paginatedData.data //it will be nil incase of  normal queries because data is already decoded on through Decode function
+paginatedData.data //it will be nil incase of  normal queries because data is already decoded on through Decode function
 ```
 
 ## Running the tests
@@ -157,7 +162,7 @@ Please make sure to update tests as appropriate.
 Copyright (c) 2020
 ```
 
-[Build-Status-Url]: https://travis-ci.org/gobeam/mongo-go-pagination
-[Build-Status-Image]: https://travis-ci.org/gobeam/mongo-go-pagination.svg?branch=master
+[Build-Status-Url]: https://travis-ci.com/gobeam/mongo-go-pagination
+[Build-Status-Image]: https://travis-ci.com/gobeam/mongo-go-pagination.svg?branch=master
 [godoc-url]: https://pkg.go.dev/github.com/gobeam/mongo-go-pagination?tab=doc
 [godoc-image]: https://godoc.org/github.com/gobeam/mongo-go-pagination?status.svg

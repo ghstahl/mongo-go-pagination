@@ -2,6 +2,7 @@ package mongopagination
 
 import (
 	"context"
+
 	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -54,7 +55,7 @@ type PagingQuery interface {
 	Filter(selector interface{}) PagingQuery
 	Limit(limit int64) PagingQuery
 	Page(page int64) PagingQuery
-	Sort(sortField string, sortValue int) PagingQuery
+	Sort(sortField string, sortValue interface{}) PagingQuery
 	Decode(decode interface{}) PagingQuery
 	Context(ctx context.Context) PagingQuery
 }
@@ -110,7 +111,7 @@ func (paging *pagingQuery) Page(page int64) PagingQuery {
 }
 
 // Sort is to sor mongo result by certain key
-func (paging *pagingQuery) Sort(sortField string, sortValue int) PagingQuery {
+func (paging *pagingQuery) Sort(sortField string, sortValue interface{}) PagingQuery {
 	sortQuery := bson.E{}
 	sortQuery.Key = sortField
 	sortQuery.Value = sortValue
@@ -264,8 +265,8 @@ type PaginatedData struct {
 // getSkip return calculated skip value for query
 func getSkip(page, limit int64) int64 {
 	page--
-	skip := page  * limit
-	 
+	skip := page * limit
+
 	if skip <= 0 {
 		skip = 0
 	}
